@@ -1,5 +1,5 @@
 ---
-title: An Introduction to French Art
+title: An Introduction to Cool French Art
 subtitle: Shamelessly Copied from Wikipedia
 weight: 100
 type: essay
