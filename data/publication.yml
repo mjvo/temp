@@ -9,32 +9,32 @@
 # Title & Description
 # ------------------------------------------------------------------------------
 
-title: Quire Starter
-subtitle: Multiformat Publishing
-reading_line:
+title: Issue 1-1
+subtitle: Visible Thinking
+reading_line:  Showcasing Signature Undergraduate Research
 short_title:
 
 description:
   one_line:
   full: >-
-    Quire is a digital publishing framework built on top of the Hugo static site generator. Generate Web, PDF, and print books (with Epub coming soon) from a single set of text files.
+    Visible Thinking is . . .
 
 # ------------------------------------------------------------------------------
 # Publication Details
 # ------------------------------------------------------------------------------
 
-pub_date:
+pub_date: 2018-11-01
 language: en
-pub_type: book # book | journal-periodical | other
+pub_type: journal-periodical # book | journal-periodical | other
 
 identifier:
   isbn:
 
 publisher:
-  - name: J. Paul Getty Trust
-    location: Los Angeles
-    url: http://www.getty.edu
-    logo: logo-getty.png
+  - name: Duke University
+    location: Durham, NC
+    url: https://www.duke.edu
+    logo: logo-duke.png
 
 # ------------------------------------------------------------------------------
 # Contributors
@@ -43,40 +43,55 @@ publisher:
 contributor_as_it_appears:
 
 contributor:
+  
+  # type: secondary for student contributors
   - id: rvalland
-    type: primary
+    type: secondary
     first_name: Rose
     last_name: Valland
     title: Chair
     affiliation: Commission for the Protection of Works of Art
     bio: "Rose Antonia Maria Valland (1 November 1898 – 18 September 1980) was a French art historian, member of the French Resistance, captain in the French military, and one of the most decorated women in French history. She secretly recorded details of the Nazi plundering of National French and private Jewish-owned art from France; and, working with the French Resistance, she saved thousands of works of art."
-    url: https://en.wikipedia.org/wiki/Rose_Valland
-    pic: contributors/rose-valland.jpg
+    
+   
   - id: ddiderot
-    type: primary
+    type: secondary
     first_name: Denis
     last_name: Diderot
     title: Chief Editor
     affiliation: Encyclopédie
     bio: "Denis Diderot (5 October 1713 – 31 July 1784) was a French philosopher, art critic, and writer. He was a prominent figure during the Enlightenment and is best known for serving as co-founder, chief editor, and contributor to the Encyclopédie along with Jean le Rond d’Alembert."
-    url: https://en.wikipedia.org/wiki/Denis_Diderot
-    pic: contributors/denis-diderot.jpg
-  - id: ipikwik
-    first_name: Ida
-    last_name: Pikwik
-
+    
+  # type: project-team (for editorial board)
+  # title: academic title
+  # affiliation:  department
+  # bio -- will appear only on "current editorial page"
+  
+  - type: project-team
+    first_name: Mark
+    last_name: Olson
+    title: Laverack Family Assistant Professor
+    affiliation: Art, Art History & Visual Studies
+    bio:
+    
+  - type: project-team
+    first_name: Jules
+    last_name: Odendahl-James
+    title:
+    affiliation: 
+    
 
 # ------------------------------------------------------------------------------
 # Copright & License
 # ------------------------------------------------------------------------------
 
-copyright: © 2017 J. Paul Getty Trust
+copyright: © 2018 Duke University
 
 license:
   name: Creative Commons Attribution 4.0 International License
   abbreviation: CC BY
   url: http://creativecommons.org/licenses/by/4.0/
-  scope: full # full | text-only | some-exceptions
+  scope: some-exceptions # full | text-only | some-exceptions
 
 # ------------------------------------------------------------------------------
 # Formats, Resources & Links
@@ -110,26 +125,26 @@ resource_link:
 # Subjects
 # ------------------------------------------------------------------------------
 
-subject:
-  - type: keyword
-    name: lemons, oranges, marmalade
-  - type: bisac
-    name: ART HISTORY / English / Jams
-    identifer: ART0009210
-  - type: getty
-    name: Paul Cézanne
-    identifier: "http://vocab.getty.edu/ulan/500004793"
-  - type: keyword
-    name: still life
-  - type: getty
-    name: Hampshire
-    identifier: "http://vocab.getty.edu/tgn/7008139"
-  - type: getty
-    name: oil pastels
-    identifier: "http://vocab.getty.edu/aat/300230810"
-  - type: getty
-    name: Still Life with Blue Pot
-    identifier: "http://www.getty.edu/cona/CONAFullSubject.aspx?subid=700002042"
+# subject:
+#   - type: keyword
+#     name: lemons, oranges, marmalade
+#   - type: bisac
+#     name: ART HISTORY / English / Jams
+#     identifer: ART0009210
+#   - type: getty
+#     name: Paul Cézanne
+#     identifier: "http://vocab.getty.edu/ulan/500004793"
+#   - type: keyword
+#     name: still life
+#   - type: getty
+#     name: Hampshire
+#     identifier: "http://vocab.getty.edu/tgn/7008139"
+#   - type: getty
+#     name: oil pastels
+#     identifier: "http://vocab.getty.edu/aat/300230810"
+#   - type: getty
+#     name: Still Life with Blue Pot
+#     identifier: "http://www.getty.edu/cona/CONAFullSubject.aspx?subid=700002042"
 
 # ------------------------------------------------------------------------------
 # Revision History
@@ -145,4 +160,4 @@ repository_url:
 # Promo Image
 # ------------------------------------------------------------------------------
 
-promo_image: promo_image.png
+# promo_image: promo_image.png

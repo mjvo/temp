@@ -1,5 +1,5 @@
 ---
-title: Cover
+title: Issue 1-1
 weight: 1
 menu: false
 type: cover

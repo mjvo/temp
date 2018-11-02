@@ -2,6 +2,6 @@
 title: Contents
 weight: 2
 type: contents
-class: list
+class: card
 search: false
 ---
