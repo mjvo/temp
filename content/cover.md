@@ -1,7 +1,6 @@
 ---
-title: Issue 1-1
+title: Editorial Statement
 weight: 1
-menu: false
 type: cover
 slug: .
 ---
