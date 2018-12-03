@@ -22,18 +22,6 @@
 
 // scss-lint:disable NameFormat
 
-// Variables
-// -----------------------------------------------------------------------------
-$dark: #363636 !default;
-$white: #ffffff !default;
-
-$quire-menu-color: $dark !default;
-$quire-menu-border-color: $dark !default;
-$quire-menu-text-color: $white !default;
-$quire-menu-width: 350px !default;
-$navbar-height: 3rem !default;
-
-
 // .quire
 // -----------------------------------------------------------------------------
 .quire {
@@ -45,33 +33,52 @@ $navbar-height: 3rem !default;
     padding: 1em;
 
     @include foreground-color($quire-menu-color, $quire-menu-text-color);
-
+    .title {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
   }
 
   // Styles when JS is not supported; menu at bottom
   &.no-js {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     min-height: 100vh;
 
-    .quire__primary { flex: 1; }
+    .quire__primary { 
+      // flex: 1; 
+      background: #fff;
+    }
 
     .quire__secondary {
-      order: 1;
+      // order: 1;
       width: 100%;
+      display: none; 
     }
   }
 
   // Styles with JS enabled (sliding menu, etc.)
   &:not(.no-js) {
     .quire__primary {
+      background: $off-white;
       display: flex;
       flex-direction: column;
       height: 100vh;
+      /*
+      top: 0;
       left: 0;
       position: absolute;
-      transition: all 0.15s linear;
+      */
+      transition-property: transform;
+      transition-duration: 0.15s;
+      transition-timing-function: linear;
       width: 100%;
+      z-index: 9999;
+
+      #main {
+        background: $quire-body-background-color; 
+      }
 
       .quire-page {
         flex: 1 1 auto;
@@ -91,13 +98,19 @@ $navbar-height: 3rem !default;
     .quire__secondary {
       border-right: solid 1px $quire-menu-border-color;
       height: 100%;
-      overflow-y: scroll;
+      overflow-y: auto;
       position: fixed;
       top: 0;
-      transform: translateX(-($quire-menu-width));
-      transition: all 0.15s linear;
+      right: 0;
+      transform: translate3d(calc(100% - 0rem), 0, 0);
+      // transform: translateX(($quire-menu-width));
+      transition-property: transform;
+      transition-duration: 0.15s;
+      transition-timing-function: linear; // transition: all 0.15s linear;
       width: $quire-menu-width;
-      z-index: 1100;
+      display: block;
+      z-index: 100;
+      
 
       @media screen and (max-width: $quire-menu-width) {
         width: calc(100vw - #{$navbar-height});
@@ -108,21 +121,34 @@ $navbar-height: 3rem !default;
       // for the menu content when it is not visible (and then un-setting when
       // that changes) produces the desired behavior.
       // scss-lint:disable IdSelector
-      #site-menu__inner { display: none; }
+      #site-menu__inner { 
+        transition-property: display;
+        transition-duration: 0.15s;
+        transition-timing-function: linear;
+        display: none; 
+      }
 
       &.is-expanded {
-        transform: translateX(0);
+        transform: translate3d(0, 0 ,0);
+        width: 352px;
+        @media screen and (max-width: $quire-nav-width) {
+          width: calc(100% - 3rem);
+        }
 
         #site-menu__inner {
           display: block;
         }
 
         + .quire__primary {
-          left: $quire-menu-width;
-          width: calc(100% - #{$quire-menu-width});
-          @media screen and (max-width: $quire-menu-width) {
-            left: calc(100vw - #{$navbar-height});
-            width: #{$navbar-height};
+          // right: $quire-menu-width;
+          // width: calc(100% - #{$quire-menu-width});
+          // transform: translate3d($quire-menu-width, 0, 0);
+          transform: translate3d(-352px, 0 ,0);
+          @media screen and (max-width: $quire-nav-width) {
+            transform: translate3d($quire-primary-move, 0 ,0);
+            // right: calc(100vw - #{$navbar-height});
+            // transform: translate3d(- $quire-menu-width, 0, 0);
+            // width: #{$navbar-height};
           }
         }
       }
@@ -142,5 +168,6 @@ $navbar-height: 3rem !default;
     &__secondary { display: none; }
   }
 }
+
 
 

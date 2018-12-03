@@ -4,25 +4,23 @@
  * @description This file serves as the entry point for Webpack, the JS library
  * responsible for building all CSS and JS assets for the theme.
  */
-
 // Stylesheets
-// console.log(webpack)
-
-import '../css/application.scss'
-// import '../css/fonts.scss'
-import 'leaflet/dist/leaflet.css'
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css'
+import '../css/application.scss'
+import 'leaflet/dist/leaflet.css'
+
 
 // JS Libraries (add them to package.json with `npm install [library]`)
 import $ from 'jquery'
-import 'smoothstate'
 import 'velocity-animate'
+import './soundcloud-api'
 
 // Modules (feel free to define your own and import here)
-import Search from './search.js'
-import Map from './map.js'
-import DeepZoom from './deepzoom.js'
-import Navigation from './navigation.js'
+import Search from './search'
+import Navigation from './navigation'
+import Popup from './popup'
+import DeepZoom from './deepzoom'
+import Map from './map'
 
 /**
  * toggleMenu
@@ -30,6 +28,7 @@ import Navigation from './navigation.js'
  * This function is bound to the global window object so it can be called from
  * templates without additinoal binding.
  */
+
 window.toggleMenu = () => {
   let menu = document.getElementById('site-menu')
   let menuAriaStatus = menu.getAttribute('aria-expanded')
@@ -39,6 +38,24 @@ window.toggleMenu = () => {
     menu.setAttribute('aria-expanded', 'false')
   } else {
     menu.setAttribute('aria-expanded', 'true')
+  }
+}
+
+/**
+ * activeMenuPage
+ * @description This function is called on pageSetup to go through the navigation 
+ * (#nav in partials/menu.html) and find all the anchor tags.  Then find the user's 
+ * current URL directory. Then it goes through the array of anchor tags and if the 
+ * current URL directory matches the nav anchor, it's the active link.
+ */
+function activeMenuPage() {
+  let nav = document.getElementById('nav'),
+      anchor = nav.getElementsByTagName('a'),
+      current = window.location.protocol + '//' + window.location.host + window.location.pathname;
+  for (var i = 0; i < anchor.length; i++) {
+    if(anchor[i].href == current) {
+        anchor[i].className = "active";
+    }
   }
 }
 
@@ -69,13 +86,13 @@ window.toggleSearch = () => {
  */
 function sliderSetup() {
   let slider = $('.quire-entry__image__group-container')
-  slider.each( function() {
+  slider.each(function () {
     let sliderImages = $(this).find('figure')
-    let firstImage = $( sliderImages.first() )
-    let lastImage = $( sliderImages.last() )
+    let firstImage = $(sliderImages.first())
+    let lastImage = $(sliderImages.last())
     sliderImages.hide()
     firstImage.addClass('current-image first-image')
-    firstImage.css('display','flex')
+    firstImage.css('display', 'flex')
     lastImage.addClass('last-image')
   });
 }
@@ -87,29 +104,29 @@ function sliderSetup() {
  * per page.
  */
 window.slideImage = (direction) => {
-  let slider = $( event.target ).closest('.quire-entry__image__group-container')
-  let firstImage = slider.children('.first-image' )
-  let lastImage = slider.children('.last-image' )
-  let currentImage = slider.children('.current-image' )
+  let slider = $(event.target).closest('.quire-entry__image__group-container')
+  let firstImage = slider.children('.first-image')
+  let lastImage = slider.children('.last-image')
+  let currentImage = slider.children('.current-image')
   let nextImage = currentImage.next('figure')
   let prevImage = currentImage.prev('figure')
   currentImage.hide()
   currentImage.removeClass('current-image')
-  if ( direction == "next" ) {
-    if ( currentImage.hasClass('last-image') ) {
+  if (direction == "next") {
+    if (currentImage.hasClass('last-image')) {
       firstImage.addClass('current-image')
-      firstImage.css('display','flex')
+      firstImage.css('display', 'flex')
     } else {
       nextImage.addClass('current-image')
-      nextImage.css('display','flex')
+      nextImage.css('display', 'flex')
     }
-  } else if ( direction == "prev" ) {
-    if ( currentImage.hasClass('first-image') ) {
+  } else if (direction == "prev") {
+    if (currentImage.hasClass('first-image')) {
       lastImage.addClass('current-image')
-      lastImage.css('display','flex')
+      lastImage.css('display', 'flex')
     } else {
       prevImage.addClass('current-image')
-      prevImage.css('display','flex')
+      prevImage.css('display', 'flex')
     }
   }
 }
@@ -131,7 +148,7 @@ window.search = () => {
   }
 
   function clearResults() {
-    resultsContainer.innerHTML = ''
+    resultsContainer.innerbody = ''
   }
 
   function displayResults(results) {
@@ -158,6 +175,14 @@ window.search = () => {
 function globalSetup() {
   let container = document.getElementById('container')
   container.classList.remove('no-js')
+  var classNames = [];
+  if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) classNames.push('device-ios');
+  if (navigator.userAgent.match(/android/i)) classNames.push('device-android');
+
+  var body = document.getElementsByTagName('body')[0];
+
+  if (classNames.length) classNames.push('on-device');
+  if (body.classList) body.classList.add.apply(body.classList, classNames);
   loadSearchData()
   scrollToHash()
 }
@@ -173,36 +198,6 @@ function loadSearchData() {
   $.get(dataURL, { cache: true }).done(data => {
     window.QUIRE_SEARCH = new Search(data)
   })
-}
-
-/**
- * menuSetup
- * @description Set the menu to its default hidden state. This
- * function should be called again after each smootState reload.
- */
-function menuSetup() {
-  let menu = document.getElementById('site-menu')
-  let menuAriaStatus = menu.getAttribute('aria-expanded')
-  menu.classList.remove('is-expanded')
-  if (menuAriaStatus === 'true') {
-    menu.setAttribute('aria-expanded', 'false')
-  }
-}
-
-function mapSetup() {
-  let map = document.getElementById('js-map')
-
-  if (map) {
-    new Map()
-  }
-}
-
-function deepZoomSetup() {
-  let deepZoom = document.getElementById('js-deepzoom')
-
-  if (deepZoom) {
-    new DeepZoom()
-  }
 }
 
 let navigation
@@ -230,11 +225,11 @@ function scrollToHash() {
   let $navbar = $(".quire-navbar")
   let targetHash = window.location.hash;
 
-  if(targetHash) {
+  if (targetHash) {
     let targetHashEl = document.getElementById(targetHash.slice(1))
     let $targetHashEl = $(targetHashEl)
 
-    if($targetHashEl.length){
+    if ($targetHashEl.length) {
       let newPosition = $targetHashEl.offset().top
       if ($navbar.length) {
         newPosition -= $navbar.height()
@@ -247,16 +242,51 @@ function scrollToHash() {
 }
 
 /**
+ * @description
+ * Set up modal for media
+ */
+function popupSetup() {
+  if (isPopup) {
+    Popup('.q-figure__wrapper')
+  }
+}
+
+/**
+ * @description 
+ * Render Map if Popup @false
+ */
+function mapSetup() {
+  [...document.querySelectorAll('.quire-map')].forEach(v => {
+    let id = v.getAttribute('id')
+    new Map(id)
+  })
+}
+
+/**
+ * @description 
+ * Render deepzoom or iiif if Popup @false
+ */
+function deepZoomSetup() {
+  [...document.querySelectorAll('.quire-deepzoom')].forEach(v => {
+    let id = v.getAttribute('id')
+    new DeepZoom(id)
+  })
+}
+
+/**
  * pageSetup
  * @description This function is called after each smoothState reload.
  * Initialize any jquery plugins or set up page UI elements here.
  */
 function pageSetup() {
-  menuSetup()
-  mapSetup()
-  deepZoomSetup()
+  activeMenuPage()
   sliderSetup()
-  navigationSetup()
+  // navigationSetup()
+  popupSetup()
+  if (!isPopup) {
+    mapSetup()
+    deepZoomSetup()
+  }
 }
 
 /**
@@ -277,32 +307,4 @@ globalSetup()
 // Run when document is ready
 $(document).ready(() => {
   pageSetup()
-
-  $('#container').smoothState({
-    scroll: false,
-    onStart: {
-      duration: 200,
-      render($container) {
-        $container.velocity('fadeOut', { duration: 200 })
-      }
-    },
-    onReady: {
-      duration: 200,
-      render($container, $newContent) {
-        $container.html($newContent)
-        $container.velocity('fadeIn', { duration: 200 })
-        pageSetup()
-      }
-    },
-    onAfter: function($container, $newContent) {
-      scrollToHash();
-
-      if (window.ga) {
-        window.ga('send', 'pageview', window.location.pathname);
-      }
-    },
-    onBefore($container, $newContent) {
-      pageTeardown();
-    }
-  })
 })

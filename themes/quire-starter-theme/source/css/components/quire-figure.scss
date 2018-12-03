@@ -16,14 +16,27 @@
 //
 // scss-lint:disable EmptyRule
 
-// Variables
-// -----------------------------------------------------------------------------
-$tablet: 500px !default;
-
-
 // .quire-figure
 // -----------------------------------------------------------------------------
 .quire-figure {
+  border-top: 1px solid $quire-primary-color;
+  border-bottom: 1px solid $quire-primary-color;
+  padding: 1em 0;
+
+  .q-figure__wrapper {
+    a {
+      border: none;
+    }
+    img {
+      -webkit-transition: -webkit-box-shadow .35s;
+      transition: box-shadow .35s;
+       &:hover {
+        -webkit-box-shadow: 0px 0px 6px 0px $black-semi-transparent;
+        -moz-box-shadow: 0px 0px 6px 0px $black-semi-transparent;
+        box-shadow: 0px 0px 6px 0px $black-semi-transparent;
+      }
+    }
+  }
 
   .content & {
     margin-left: 0;
@@ -45,12 +58,12 @@ $tablet: 500px !default;
     font-size: 1rem;
     margin-top: .5rem;
     .quire-figure__caption & {
-      display: inline;
+      display: block;
     }
   }
 
   .content figure &__caption {
-    font-size: 1rem;
+    font-size: 0.75em;
     line-height: 1.5;
     margin-top: .5rem;
     font-style: normal;
@@ -63,7 +76,7 @@ $tablet: 500px !default;
 
   &__credit {
     display: block;
-    font-size: .75rem;
+    font-size: 1em;
     margin-top: .25rem;
     @media print {
       font-size: 7.5pt;
@@ -111,6 +124,10 @@ $tablet: 500px !default;
         display: inline;
       }
     }
+  }
+
+  &__video {
+    width: 100%;
   }
 
   &.is-pulled-left,

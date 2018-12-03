@@ -2,17 +2,17 @@
 // Quire-map.scss
 // -----------------------------------------------------------------------------
 
-// Variables
-// -----------------------------------------------------------------------------
-$gap: 16px !default;
-$quire-map-height: 500px !default;
-
-
 // .quire-map
 // -----------------------------------------------------------------------------
-.quire-map {
+
+.no-popup-quire-map {
   height: $quire-map-height;
   margin-bottom: $gap;
+}
+
+.quire-map {
+  // height: $quire-map-height;
+  // margin-bottom: $gap;
   @media print {
     height: 0;
   }

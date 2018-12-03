@@ -24,6 +24,7 @@ the figure for each into a figure group
 {{ $idstring := replace (.Get "id") " " "" }}
 {{ $idlist := split $idstring "," }}
 
+
 <figure class='quire-figure quire-figure--group {{ with .Get "class" }}{{ . }}{{ end }}{{ with .Get "grid" }} quire-grid--{{ . }}{{ end }}'>
   {{ with .Get "grid" }}
   {{ $.Scratch.Add "grid" . }}
@@ -52,7 +53,79 @@ the figure for each into a figure group
 
     {{ else }}
 
-    <div class='quire-figure__video-wrapper{{ if .aspect_ratio }}--{{ .aspect_ratio }}{{ else }}--widescreen{{ end }}'>
+    {{ if eq .Site.Params.popup true }}
+
+    <div class='q-figure__wrapper quire-figure__video-wrapper{{ if .aspect_ratio }}--{{ .aspect_ratio }}{{ else }}--widescreen{{ end }}'>
+      {{ if eq .media_type "youtube" }}
+        <a href='https://www.youtube.com/watch?v={{ .media_id }}'
+           data-type="video"
+           class="video popup"
+           {{ if .caption }} title='{{ .caption | markdownify | safeHTML }}' {{ end }}>
+        <img class='quire-figure__image'
+             src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}' 
+             alt='{{ if $.Get "alt" }}{{ $.Get "alt" }}{{ else if .alt }}{{ .alt }}{{ end }}'/>
+        </a>
+      {{ else if eq .media_type "vimeo" }}
+      <div class="q-figure__wrapper">
+          <a href='https://player.vimeo.com/video/{{ .media_id }}'
+             class="video popup"
+             data-type="video" 
+             {{ if .caption }} title='{{ .caption | markdownify | safeHTML }}' {{ end }}>
+          <img class='quire-figure__image'
+               src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}' 
+               alt='{{ if $.Get "alt" }}{{ $.Get "alt" }}{{ else if .alt }}{{ .alt }}{{ end }}'/>
+          </a>
+        </div>
+        {{ else if eq .media_type "audio" }}
+      <iframe {{ if eq $.Site.Params.pdf true }} class="visually-hidden" {{ end }} id='{{ .id }}'
+      width="100%" 
+      height="166" 
+      scrolling="no" 
+      frameborder="no" 
+      allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>   
+      {{ if eq $.Site.Params.audioFigureFallbackText true }}
+        {{ if .src }}
+          <img {{ if eq $.Site.Params.pdf true }} {{ else }} class="visually-hidden" {{ end }} id='{{ .id }}'
+          src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}'
+          alt='{{ if $.Get "alt" }}{{ $.Get "alt" }}{{ else if .alt }}{{ .alt }}{{ end }}' />
+        {{ else }}
+          <p {{ if eq $.Site.Params.pdf true }} {{ else }} class="visually-hidden" {{ end }}>No Image avaiable.</p>
+        {{ end }}
+      {{ end }}
+  {{ else if eq .media_type "soundcloud" }}   
+      <iframe {{ if eq $.Site.Params.pdf true }} class="visually-hidden" {{ end }} id='{{ .id }}'
+      width="100%" 
+      height="166" 
+      scrolling="no" 
+      frameborder="no" 
+      allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>  
+      {{ if eq $.Site.Params.audioFigureFallbackText true }}
+      {{ if .src }}
+        <img {{ if eq $.Site.Params.pdf true }} {{ else }} class="visually-hidden" {{ end }} id='{{ .id }}'
+        src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}'
+        alt='{{ if $.Get "alt" }}{{ $.Get "alt" }}{{ else if .alt }}{{ .alt }}{{ end }}' />
+      {{ else }}
+        <p {{ if eq $.Site.Params.pdf true }} {{ else }} class="visually-hidden" {{ end }}>No Image avaiable.</p>
+      {{ end }}
+    {{ end }}
+      {{ end }}
+      <div class="quire-figure__video-fallback">
+        {{ if .src }}
+        <img id="{{ .id }}" src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}' alt="{{ if .alt }}{{ .alt }}{{ end }}" />
+        {{ else }}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 36" fill="darkgray">
+          <path  d="M41.9,13.8C42,15.2,42,16.6,42,18s0,2.8-0.1,4.2c0,0.9-0.3,1.6-0.8,2.2s-1.2,0.9-2.1,0.9c-2,0.1-4.3,0.2-7,0.2 s-5-0.1-7-0.2c-0.8,0-1.5-0.3-2.1-0.9s-0.8-1.4-0.8-2.2C22,20.8,22,19.4,22,18c0-0.9,0.1-2.3,0.2-4.2c0-0.9,0.3-1.6,0.8-2.2 s1.2-0.9,2-0.9c1.9-0.1,4.1-0.2,6.6-0.2H32h0.4c2.5,0,4.7,0.1,6.6,0.2c0.8,0,1.5,0.3,2.1,0.9S41.9,12.9,41.9,13.8z M30.1,21.8 l5.7-3.8l-5.7-3.9V21.8z"/>
+          <path d="M0,0v36h64V0H0z M63,35H1V1h62V35z"/>
+        </svg>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ else }}
+
+    <div class='q-figure__wrapper quire-figure__video-wrapper{{ if .aspect_ratio }}--{{ .aspect_ratio }}{{ else }}--widescreen{{ end }}'>
       {{ if eq .media_type "youtube" }}
       <iframe id="{{ .id }}"
               class="quire-figure__video"
@@ -67,6 +140,22 @@ the figure for each into a figure group
               webkitallowfullscreen
               mozallowfullscreen
               allowfullscreen></iframe>
+      {{ else if eq .media_type "audio" }}
+      <iframe id='{{ .id }}'
+                      width="100%" 
+                      height="166" 
+                      scrolling="no" 
+                      frameborder="no" 
+                      allow="autoplay" 
+                      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe> 
+      {{ else if eq .media_type "soundcloud" }}   
+      <iframe id='{{ .id }}'
+                      width="100%" 
+                      height="166" 
+                      scrolling="no" 
+                      frameborder="no" 
+                      allow="autoplay" 
+                      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe> 
       {{ end }}
       <div class="quire-figure__video-fallback">
         {{ if .src }}
@@ -79,15 +168,25 @@ the figure for each into a figure group
         {{ end }}
       </div>
     </div>
+
+    {{ end }}
+
     {{ end }}
     {{/* -------------------- END VIDEO BLOCK -------------------- */}}
     {{ else }}
 
     {{/* -------------------- BEGIN NO_MEDIA_ID BLOCK -------------------- */}}
-    <img id="{{ .id }}"
-         class="quire-figure__image"
+    <div class='q-figure__wrapper'>
+        {{ if eq $.Site.Params.popup true }}
+        <a class="image popup" href='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}' {{ if .caption }} title='{{ .caption | markdownify | safeHTML }}' {{ end }}>
+        {{ end }}
+      <img id="{{ .id }}" class="quire-figure__image"
          src='{{ printf "%s/%s" ($.Scratch.Get "imageDir") .src | relURL }}'
          alt="{{ if .alt }}{{ .alt }}{{ end }}" />
+         {{ if eq $.Site.Params.popup true }}
+        </a>
+         {{ end }}
+    </div>
     {{/* -------------------- END NO_MEDIA_ID BLOCK -------------------- */}}
     {{ end }}
 
@@ -136,6 +235,24 @@ the figure for each into a figure group
       {{- end -}}
       {{ end }}
 
+      {{ if eq $.Site.Params.audioFigureFallbackText true }}
+      {{- if eq .media_type "audio" }}
+      <span class="quire-figure__media-fallback__text">
+        {{ $.Site.Params.audioFigureFallbackTextBefore -}}
+        <a href='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}'>https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}</a>
+        {{- $.Site.Params.audioFigureFallbackTextAfter }}
+      </span>
+      {{- end -}}
+  
+      {{- if eq .media_type "soundcloud" }}
+      <span class="quire-figure__media-fallback__text">
+        {{ $.Site.Params.audioFigureFallbackTextBefore -}}
+        <a href='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}'>https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ .media_id }}</a>
+        {{- $.Site.Params.audioFigureFallbackTextAfter }}
+      </span>
+      {{- end -}}
+      {{ end }}
+
       {{ if .credit }}
       <span class="quire-figure__credit">{{ .credit | markdownify }}</span>
       {{ end }}
@@ -170,13 +287,16 @@ the figure for each into a figure group
   {{/* -------------------- BEGIN GROUP CAPTION BLOCK -------------------- */}}
   {{ if or (.Get "caption") ($.Get "credit") }}
   <figcaption class="quire-figure__caption">
+    {{ if .Get "popup" }}
+    {{ .Get "popup" | markdownify }}
+    {{ end }}
     {{ if .Get "caption" }}{{ .Get "caption" | markdownify }}{{ end }}
     {{ if $.Get "credit" }}<span class="quire-figure__credit">{{ $.Get "credit" | markdownify }}</span>{{ end }}
   </figcaption>
   {{/* -------------------- END GROUP CAPTION BLOCK -------------------- */}}
   {{ end }}
-
 </figure>
+
 {{/* -------------------- END ID BLOCK -------------------- */}}
 
 {{ else }}
