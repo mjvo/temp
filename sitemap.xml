@@ -3,55 +3,55 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://mjvo.github.io/temp/</loc>
+    <loc>/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/contents/</loc>
+    <loc>/contents/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/05/</loc>
+    <loc>/05/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/08/</loc>
+    <loc>/08/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/06/</loc>
+    <loc>/06/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/03/</loc>
+    <loc>/03/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/02/</loc>
+    <loc>/02/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/01/</loc>
+    <loc>/01/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/04/</loc>
+    <loc>/04/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/07/</loc>
+    <loc>/07/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/editors/</loc>
+    <loc>/editors/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/about/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>https://mjvo.github.io/temp/search.json</loc>
+    <loc>/search.json</loc>
   </url>
   
 </urlset>
