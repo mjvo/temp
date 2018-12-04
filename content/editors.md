@@ -7,7 +7,11 @@ type: about
 
 ---
 
-Issue 1-1 Editorial Board
+## Editors
 
+
+{{< q-contributors range="primary" type="name-plus" >}}
+
+## Editorial Board 
 {{< q-contributors range="secondary" type="name-plus" >}}
 
