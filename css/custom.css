@@ -1,0 +1,253 @@
+.quire-page__content {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#003366+0,0680cd+100 */
+background: #003366; /* Old browsers */
+background-image: url("../img/vt_logo_eye.png");  /* fall back */
+background: -moz-linear-gradient(left,  #003366 0%, #0680cd 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #003366 0%,#0680cd 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #003366 0%,#0680cd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003366', endColorstr='#0680cd',GradientType=1 ); /* IE6-9 */  
+background-image: url("../img/vt_logo_eye.png"), linear-gradient(to right,  #003366 0%,#0680cd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ 
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: bottom left;
+background-size: contain;
+}
+
+.quire-contents-buttons li.quire-nav-button a {
+	color: #fff;
+}
+.quire-contents-buttons li.quire-nav-button {
+	background-color: rgba(255,255,255,0.1)
+}
+.quire-contents-buttons li.quire-nav-button.prev svg {
+	fill: #fff;
+}
+
+.quire-contents-buttons li.quire-nav-button.prev a {
+	color: #fff;
+}
+
+.quire-navbar {
+	z-index: 100;
+}
+.quire-menu .page-item a.active, .quire-menu .section-item a.active {
+	color: #ed9832 !important;
+	font-weight: bold;
+}
+
+/* contents page */
+.quire-contents-list.list ul {
+	list-style-type: none;
+}
+.quire-contents-list.list .title, .quire-contents-list.brief .title {
+	font-weight: bold;
+}
+
+.quire-contents-list.list .contributor {
+	font-weight: normal;
+}
+
+/* Tabs */
+
+.tab-wrap {
+	
+	max-width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	  -ms-flex-wrap: wrap;
+		  flex-wrap: wrap;
+	position: relative;
+	list-style: none;
+	/* background-color: #fff; */
+	margin: 40px 0;
+}
+
+.tab {
+	display: none;
+}
+.tab:checked:nth-of-type(1) ~ .tab__content:nth-of-type(1) {
+	opacity: 1;
+	-webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+	transition: 0.5s opacity ease-in, 0.2s transform ease;
+	position: relative;
+	top: 0;
+	z-index: 10;
+	-webkit-transform: translateY(0px);
+		  transform: translateY(0px);
+	text-shadow: 0 0 0;
+}
+.tab:checked:nth-of-type(2) ~ .tab__content:nth-of-type(2) {
+	opacity: 1;
+	-webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+	transition: 0.5s opacity ease-in, 0.2s transform ease;
+	position: relative;
+	top: 0;
+	z-index: 10;
+	-webkit-transform: translateY(0px);
+		  transform: translateY(0px);
+	text-shadow: 0 0 0;
+}
+.tab:checked:nth-of-type(3) ~ .tab__content:nth-of-type(3) {
+	opacity: 1;
+	-webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+	transition: 0.5s opacity ease-in, 0.2s transform ease;
+	position: relative;
+	top: 0;
+	z-index: 10;
+	-webkit-transform: translateY(0px);
+		  transform: translateY(0px);
+	text-shadow: 0 0 0;
+}
+.tab:checked:nth-of-type(4) ~ .tab__content:nth-of-type(4) {
+	opacity: 1;
+	-webkit-transition: 0.5s opacity ease-in, 0.2s transform ease;
+	transition: 0.5s opacity ease-in, 0.2s transform ease;
+	position: relative;
+	top: 0;
+	z-index: 100;
+	-webkit-transform: translateY(0px);
+		  transform: translateY(0px);
+	text-shadow: 0 0 0;
+}
+.tab:first-of-type:not(:last-of-type) + label {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.tab:not(:first-of-type):not(:last-of-type) + label {
+  border-radius: 0;
+}
+.tab:last-of-type:not(:first-of-type) + label {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.tab:checked + label {
+	background-color: #fff;
+	/* box-shadow: 0 -1px 0 #fff inset; */
+	cursor: default;
+}
+.tab:checked + label:hover {
+	/* box-shadow: 0 -1px 0 #fff inset; */
+	background-color: #fff;
+}
+.tab + label {
+  width:100%;	 
+  font-weight: bold; 
+	box-shadow: 0 -1px 0 #eee inset;
+	border-radius: 6px 6px 0 0;
+	cursor: pointer;
+	display: block;
+	text-decoration: none;
+	/* color: #333; */
+	-webkit-box-flex: 3;
+	-webkit-flex-grow: 3;
+	  -ms-flex-positive: 3;
+		  flex-grow: 3;
+	text-align: center;
+	background-color: #f2f2f2;
+	-webkit-user-select: none;
+	 -moz-user-select: none;
+	  -ms-user-select: none;
+		  user-select: none;
+	text-align: center;
+	-webkit-transition: 0.3s background-color ease, 0.3s box-shadow ease;
+	transition: 0.3s background-color ease, 0.3s box-shadow ease;
+	height: 50px;
+	box-sizing: border-box;
+	padding: 15px;
+}
+@media (min-width:768px) {
+		
+	.tab + label {
+		width:auto;
+	}
+}
+.tab + label:hover {
+	background-color: rgba(0, 0, 0, 0.2);/* #f9f9f9; */
+	/* box-shadow: 0 1px 0 #f4f4f4 inset; */
+}
+.tab__content {
+	padding: 2em 0px;
+	background-color: transparent;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+	opacity: 0;
+	left: 0;
+	-webkit-transform: translateY(-3px);
+		  transform: translateY(-3px);
+	border-radius: 6px;
+	
+}
+
+/* Video Cover */
+ 
+ .hidden {
+     display: none;
+ }
+ 
+ .homepage-hero-module {
+    border-right: none;
+    border-left: none;
+    position: relative;
+  }
+
+  .no-video .video-container video,
+  .touch .video-container video {
+    display: none;
+  }
+
+  .no-video .video-container .poster,
+  .touch .video-container .poster {
+    display: block !important;
+  }
+
+  .video-container {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-container .poster img {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+  }
+
+  .video-container .filter {
+    z-index: 100;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+
+  .video-container video {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+  }
+
+  .video-container video.fillWidth {
+    width: 100%;
+  }
+
+/* Transcript Toggle */
+input[name="accordion-select"], .panel-block {
+  display: none;
+}
+label.panel-heading {
+  cursor: pointer;
+  display: block;
+}
+
+/* the magic */
+#transcript:checked ~ .panel > .transcript
+ {
+  display: flex;
+}
