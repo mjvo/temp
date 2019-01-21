@@ -1,10 +1,20 @@
 // =============================================================================
 // Variables.scss
 // -----------------------------------------------------------------------------
-// Change values here to make changes to the type, color, cover and layout of // your publication. Variable names are always preceeded by a $ (dollar sign).
+// Change values here to make changes to the type, color, cover and layout of 
+// your publication. Variable names are always preceeded by a $ (dollar sign).
 // To avoid errors, variables names should not be changed or deleted, and be
 // sure to leave the colons (:) and semi-colons (;) in place.
 
+$accent-color: $red;
+$content-background-color: $white;
+$secondary-background-color: $off-white;
+
+// Declare the theme modern/classic
+$theme: modern;
+
+// Navbar color: normal/accent
+$navbar: normal;
 
 // Typography
 // -----------------------------------------------------------------------------
@@ -26,99 +36,99 @@ $quire-page-paragraph-style: line-space;
 // $quire-page-paragraph-style: indent;
 // make the value null for paragraphs with no indent and a line space between
 
-// Declare the theme primary or secondary
-$theme: primary;
-
-// Colors
+// Quire Redesign
 // -----------------------------------------------------------------------------
-// Change the color variables once at the top, or change elements individually
-// below. Colors are typically Hex values, or one of 140 standard color names/
 
-$color-primary: #3273dc;
-$dark: #363636;
-$black: #000000;
-$off-black: #333333;
-$light-black: #292929;
-$dark-gray: #999999;
-$gray: #CCCCCC;
-$red: #CF4747;
-$dark-red: #B02E2E;
-$light-yellow: #F9F9A3;
-$light: #f5f5f5;
-$off-white: #EEF2F3;
-$white: #ffffff;
-$blue: #3273dc;
-$light-blue: #6A8EB8;
-$dark-semi-transparent: rgba(0, 0, 0, .5);
-$black-semi-transparent: rgba(0, 0, 0, 0.75);
-
-$quire-page-link-color: $color-primary;
-$quire-page-link-highlight: $light;
-
+// Print 
 $page-color: $white;
 $page-text-color: $dark;
 
+// included in various foreground-color on page.scss
 $quire-page-header-color: $light;
 $quire-page-header-text-color: $dark;
 
-$quire-navbar-color: $white;
-$quire-navbar-border-color: $dark;
-$quire-navbar-text-color: $dark;
-
+// part of menus 
 $quire-menu-color: $dark;
 $quire-menu-border-color: $dark;
 $quire-menu-text-color: $white;
 
+// entry page image colors
 $quire-entry-image-color: $dark;
 $quire-entry-image-icons-color: $white;
 
-$quire-splash-page-color: $color-primary;
+// new quire variables
+$quire-hover-color: $light-yellow;
 
-// Quire Redesign
+
+// Declare default values based on modern theme
 // -----------------------------------------------------------------------------
-// Setup of new quire variables
-// Primary Theme
 $family-primary: $noto-sans; // body text: $serif, $sans-serif, $slab-serif
 $family-secondary: $ibm-sans; // headings and navigation items: $serif, $sans-serif, $slab-serif
 $quire-header-font: $family-secondary;
 $quire-nav-font: $family-primary;
 $quire-body-font: $family-primary;
-$quire-header-color: $off-black;
-$quire-nav-font-color: $white;
-$quire-body-font-color: $black;
-$quire-hover-color: $light-yellow;
-$quire-primary-color: $red;
-$quire-primary-color-hover: $dark-red;
-$quire-secondary-color: $off-black;
-$quire-secondary-color-hover: $light-blue;
-$quire-body-background-color: $off-white;
 
-// Secondary Theme
-@if $theme == secondary {
-  $family-primary: $noto-serif; // body text: $serif, $sans-serif, $slab-serif
-  $family-secondary: $times-serif; // headings and navigation items: $serif, $sans-serif, $slab-serif
+// Modern Theme
+// -----------------------------------------------------------------------------
+@if $theme == modern {
+  $family-primary: $noto-sans; // body text: $serif, $sans-serif, $slab-serif
+  $family-secondary: $ibm-sans; // headings and navigation items: $serif, $sans-serif, $slab-serif
+
   $quire-header-font: $family-secondary;
   $quire-nav-font: $family-primary;
   $quire-body-font: $family-primary;
-  $quire-header-color: $off-black;
-  $quire-nav-font-color: $white;
-  $quire-body-font-color: $black;
-  $quire-hover-color: $light-yellow;
-  $quire-primary-color: $off-black;
-  $quire-primary-color-hover: $light-blue;
-  $quire-secondary-color: $light-blue;
-  $quire-secondary-color-hover: $light-blue;
-  $quire-body-background-color: $off-white;
+
+  $accent-color: $blue; //$red
+  $content-background-color: $white !default;
+  $secondary-background-color: $off-white !default;
 }
+
+// Classic Theme
+// -----------------------------------------------------------------------------
+@if $theme == classic {
+  $family-primary: $noto-serif; // body text: $serif, $sans-serif, $slab-serif
+  $family-secondary: $times-serif; // headings and navigation items: $serif, $sans-serif, $slab-serif
+
+  $quire-header-font: $family-secondary;
+  $quire-nav-font: $family-primary;
+  $quire-body-font: $family-primary;
+  
+  $accent-color: $light-blue;
+  $content-background-color: $white !default;
+  $secondary-background-color: $off-white !default;
+}
+
+// Declare navbar variables
+// -----------------------------------------------------------------------------
+$quire-navbar-color: $white;
+$quire-navbar-hover-color: darken($quire-navbar-color, 5%);
+$quire-navbar-text-color: $dark;
+
+// Normal Navbar
+// -----------------------------------------------------------------------------
+@if $navbar == normal {
+  $quire-navbar-color: $white;
+  $quire-navbar-hover-color: darken($quire-navbar-color, 5%);
+  $quire-navbar-text-color: $dark;
+}
+
+// Accent Navbar
+// -----------------------------------------------------------------------------
+@if $navbar == accent {
+  $quire-navbar-color: $accent-color;
+  $quire-navbar-hover-color: darken($quire-navbar-color, 5%);
+  $quire-navbar-text-color: $white;
+}
+
+
 // Cover
 // -----------------------------------------------------------------------------
-
-$quire-cover-color-1: $color-primary;
-$quire-cover-color-2: #dc52f5;
+$quire-cover-color-1: $blue;
+$quire-cover-color-2: $light-purple;
 // make the colors the same to have a solid background
 
 $cover-overlay-image-opacity: .5;
-$cover-overlay-image: 'pattern-1.png';
+$cover-overlay-image: 'pattern_spiral_gradient_02@2x.png';
 // pattern-1.png, pattern-2.png, pattern-3.png, pattern-4.png
 // Or add your own custom pattern tile in your static/img directory and
 // reference it here. To have a single image for the cover, with no color
@@ -137,16 +147,18 @@ $quire-cover-text-alignment: left;
 $quire-cover-footer-color: $light;
 $quire-cover-footer-text-color: $dark;
 
-$quire-page-link-color: $quire-primary-color !default;
-
 
 // Layout
 // ----------------------------------------------------------------------------
-$quire-menu-width: calc(100% - 3rem);
+$quire-menu-width: 352px;
 $quire-primary-move: calc(-100% + 3rem);
-$quire-nav-width: calc(352px + 3rem);
 
 $navbar-height: 3rem;
+
+// adjust column gap for grid
+// NOTICE: this var = 2x the value 
+// 5px = 10px margin between columns
+$column-gap: 5px;
 
 $quire-entry-header-height: 6rem;
 $quire-map-height: 500px;

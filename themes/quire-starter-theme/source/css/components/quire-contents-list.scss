@@ -6,6 +6,37 @@
 // class exists to provide a small amount of additional styling for the main
 // TOC page of the book. Print TOC styles can also be defined on this element.
 
+// .quire-contents
+// -----------------------------------------------------------------------------
+.quire-contents {
+  background-color: $off-white;
+  @media print {
+    background-color: transparent;
+  }
+  .quire-page__abstract {
+    margin-bottom: 0;
+    padding: 40px 6rem !important;
+    .container {
+      padding: 0;
+      background-color: transparent;
+    }
+    &:after {
+      background-color: transparent;
+    }
+  }
+}
+
+// .contents-grid 
+// -----------------------------------------------------------------------------
+.quire__primary {
+  .quire-contents {
+    .quire-page__abstract {
+      // padding-left: 5rem;
+      // padding-right: 5rem;
+    }
+  }
+}
+
 // .quire-contents-header
 // -----------------------------------------------------------------------------
 .quire-contents-header {
@@ -29,7 +60,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.025em;
-    color: $quire-header-color;
+    color: findColorInvert($content-background-color);
   }
 
   h2 {
@@ -76,32 +107,47 @@
     margin-left: 0;
   }
 
-  .arrow .section-indent {
+  ul.arrow .section-indent {
     padding-left: 20px;
     font-size: .75em;
+    width: auto;
+    a {
+      margin-bottom: 1em;
+      padding-right: 0;
+      padding-bottom: 0;
+      border-radius: 0;
+      display: inline-block;
+      border-bottom: 1px dotted $off-black;
+      &:hover {
+        border-bottom: 1px solid darken($accent-color, 15%);
+      }
+    }
   }
 
-  .menu-list a {
-    position: relative;
-    padding-left: 0;
-    font-size: 1em;
-    .arrow {
-      -webkit-transition: all .5s ease;
-      transition: all .5s ease;
-    }
-    &:hover {
-      background-color: inherit;
-      color: $quire-primary-color-hover;
+  .menu-list {
+    a {
+      color: background-color-text($secondary-background-color);
+      position: relative;
+      padding-left: 0;
+      font-size: 1em;
       .arrow {
-        margin-left: 14px;
-        fill: $quire-primary-color-hover;
+        -webkit-transition: all .15s ease;
+        transition: all .15s ease;
+        fill: background-color-text($secondary-background-color);
+      }
+      &:hover {
+        background-color: inherit;
+        color: darken($accent-color, 15%);
+        .arrow {
+          margin-left: 14px;
+          fill: darken($accent-color, 15%);
+        }
       }
     }
   }
 
   .list-header {
     padding: .5em .75em .5em 0;
-    text-transform: uppercase;
     letter-spacing: 1px;
   }
 
@@ -126,18 +172,28 @@
       line-height: inherit;
     }
     .section-item .title {
+      color: background-color-text($secondary-background-color);
       margin-bottom: 0;
+    }
+    .quire-menu__formats {
+      a {
+        text-decoration: none;
+      }
     }
   }
 
   &.abstract {
     .title {
+      font-size: 1em;
+      font-style: normal;
+      font-weight: 400;
       line-height: 1.35;
       margin-bottom: 0;
       font-family: $quire-header-font;
     }
     .abstract-text {
-      padding-left: 1.5rem;
+      font-size: 14px;
+      line-height: 1.5em;
       margin-bottom: 1rem;
       line-height: 1.4;
       p {
@@ -146,6 +202,12 @@
       @if $quire-page-paragraph-style == "indent" {
         p { margin-bottom: 0; }
         p + p { text-indent: 2em; }
+      }
+    }
+    .quire-menu__formats {
+      a {
+        font-size: 1em;
+        text-decoration: none;
       }
     }
   }
@@ -177,6 +239,18 @@
       font-size: .75em;
     }
 
+    .menu-list {
+      ul.arrow {
+        .page-item {
+          &:last-child {
+            a {
+              padding: 0 0 0 1rem;
+            }
+          }
+        }
+      }
+    }
+
     .quire-menu__formats {
       display: block;
       ul {
@@ -184,6 +258,7 @@
       }
       a {
         font-size: 1.325em;
+        text-decoration: none;
       }
     }
 
@@ -219,9 +294,21 @@
         border-radius: 2px;
         margin: 1rem;
         box-shadow: none;
+        background-color: $content-background-color;
 
         a {
           padding: 0;
+          color: $accent-color;
+          border-bottom: none;
+
+          &:hover {
+            border-bottom: none;
+          }
+
+          svg {
+            fill: $accent-color;
+            vertical-align: text-bottom;
+          }
         }
 
         .card-image {
@@ -230,6 +317,8 @@
           padding: 1.5em 1.5em 0em 1.5em;
 
           .image {
+            -webkit-transition: -webkit-box-shadow .35s;
+            transition: box-shadow .35s;
             &:hover {
               -webkit-box-shadow: 0px 0px 6px 0px $black-semi-transparent;
               -moz-box-shadow: 0px 0px 6px 0px $black-semi-transparent;
@@ -242,21 +331,19 @@
       .card-content {
         padding: 1.5em;
         font-family: $quire-nav-font;
-
+        
         .artist {
           text-transform: uppercase;
         }
+        .title {
+          color: $accent-color;
+          svg {
+            fill: $accent-color;
+            vertical-align: sub;
+          }
+        }
         p {
           padding-top: 0.5rem;
-          a {
-            padding: 0;
-            color: $quire-primary-color;
-
-            svg {
-              fill: $quire-primary-color;
-              vertical-align: text-bottom;
-            }
-          }
         }
       }
     }

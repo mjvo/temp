@@ -17,20 +17,20 @@
     display: inline-block;
     width: 6.65em;
     height: 2em;
-    background: transparent;
-    border: 1px solid $quire-primary-color;
+    background: $secondary-background-color;
+    border: 1px solid darken($accent-color, 15%);
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    -webkit-transition: all .5s ease;
-    transition: all .5s ease;
+    -webkit-transition: all .25s ease;
+    transition: all .25s ease;
     font-size: 1em;
 
     a {
       display: inline-block;
       width: 8.75em;
       height: 3.25em;
-      color: $quire-primary-color;
+      color: background-color($accent-color);
       font-size: .8em;
       padding-top: .4em;
       font-family: $quire-nav-font;
@@ -40,10 +40,11 @@
       margin-left: 0;
       margin-right: .55rem;
       a {
+        color: $accent-color;
         margin-right: .5rem;
       }
       svg {
-        fill: $quire-primary-color;
+        fill: $accent-color;
         margin-right: .5rem;
       }
     }
@@ -53,7 +54,7 @@
       height: 1.25rem;
       margin-left: -.25rem;
       margin-bottom: .15rem;
-      fill: $quire-primary-color;
+      fill: $accent-color;
     }
 
     .nav-title {
@@ -61,28 +62,28 @@
     }
 
     &.next {
-      background-color: $quire-primary-color;
+      background-color: $accent-color;
       svg {
-        fill: $quire-nav-font-color;
+        fill: findColorInvert($accent-color);
       }
       &:hover {
-        background-color: $quire-primary-color-hover;
+        background-color: darken($accent-color, 15%);
       }
       a {
-        color: $quire-nav-font-color;
+        color: findColorInvert($accent-color);
       }
     }
 
     &:hover {
-      background-color: $quire-primary-color;
+      background-color: $accent-color;
       @if $family-primary == $noto-serif {
-        background-color: $quire-primary-color-hover;
+        background-color: darken($accent-color, 15%);
       }
       a {
-        color: $quire-nav-font-color;
+        color: findColorInvert($accent-color);
       }
       svg {
-        fill: $quire-nav-font-color;
+        fill: findColorInvert($accent-color);
       }
     }
   }

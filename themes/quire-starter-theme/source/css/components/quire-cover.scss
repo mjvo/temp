@@ -28,7 +28,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    min-height: calc(95vh - #{$navbar-height});
+    min-height: calc(95vh - #{$navbar-height}) !important;
     text-align: $quire-cover-text-alignment;
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@
       @media print {
         display: block;
         page-break-after: always;
-        color: $color-primary;
+        color: $quire-cover-text-color;
         text-transform: uppercase;
         letter-spacing: 1pt;
         font-family: $family-secondary;
@@ -113,7 +113,7 @@
       display: block;
       position: relative;
       line-height: 50px;
-      color: $white;
+      color: background-color-text($black);
       width: 50px;
       height: 50px;
       background: $black;
@@ -127,7 +127,7 @@
         margin-top: .15rem;
         -webkit-transition: all .5s ease;
         transition: all .5s ease;
-        fill: $white;
+        fill: background-color-text($black);
         img {
           padding: 7px 0;
         }
@@ -139,8 +139,8 @@
   }
 
   &__button {
-    background-color: $quire-primary-color;
-    color: findColorInvert($quire-page-link-color);
+    background-color: $accent-color;
+    color: findColorInvert($accent-color);
     border-width: 0px;
     border-radius: 2px;
     font-family: $quire-nav-font;
@@ -153,19 +153,23 @@
       height: 1.25rem;
       margin-left: .25rem;
       margin-bottom: .05rem;
-      fill: findColorInvert($quire-page-link-color);
+      fill: findColorInvert($accent-color);
     }
-  }
-  &__button:hover {
-    background-color: $quire-primary-color-hover;
-    color: $white;
+    &:hover {
+      background-color: darken($accent-color, 15%);
+      color: $white;
+    }
   }
 
   .quire-page__content {
     padding-bottom: 0;
     .container.is-fluid {
       .content {
-        background-color: $off-white;
+        color: background-color-text($secondary-background-color);
+        background-color: $secondary-background-color;
+        @media print {
+          background-color: transparent;
+        }
         p {
           line-height: 2.5em;
           font-family: $quire-body-font;
@@ -189,9 +193,13 @@
         line-height: 34px;
         font-size: 1.25em;
         a {
-          padding-top: .1em;
+          padding-top: .25em;
           height: 2.5em;
           width: 8.3em;
+          color: $content-background-color;
+        }
+        svg {
+          fill: $content-background-color;
         }
       }
     }

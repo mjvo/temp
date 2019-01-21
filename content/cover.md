@@ -3,8 +3,9 @@ title: Editorial Statement
 weight: 1
 type: cover
 slug: .
+video: "Ideas"
 ---
 
-Editorial statement goes here . . .
+# Welcome
 
-Welcome to the inaugural issue of Duke Visible Thinking, an online publication featuring exemplary faculty-mentored student research
+Welcome to the inaugural issue of Duke Visible Thinking, an online publication featuring exemplary faculty-mentored student research.   
